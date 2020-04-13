@@ -1,11 +1,17 @@
-# calllib
+# librarycallhistory
 
 ## Install
 
 ```INSTALLATION
-npm install --save calllib bootstrap reactstrap
+npm install --save https://github.com/mahesh-co1/librarycallhistory bootstrap reactstrap
 ```
 
+Import Bootstrap CSS in the src/index.js file:
+
+```
+import 'bootstrap/dist/css/bootstrap.css';
+
+```
 ## Usage
 
 ```js
@@ -19,6 +25,7 @@ class Example extends Component {
   }
 }
 ```
+
 
 ## License
 
