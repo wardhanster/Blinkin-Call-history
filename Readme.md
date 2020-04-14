@@ -17,7 +17,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 ```js
 import React, { Component } from "react";
 
-import CallHistory from "calllib";
+import CallHistory from "call-hist-lib";
 
 class Example extends Component {
   render() {
