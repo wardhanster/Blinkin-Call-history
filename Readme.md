@@ -28,6 +28,8 @@ class Example extends Component {
   }
 }
 ```
+## Props details
+
 **baseUrl** = For api request  
 **get_files** = get image name and extension for particular room_id  
 **file_base_path** = Api for getting images of particular room_id  
