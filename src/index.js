@@ -1,10 +1,10 @@
 import React from "react";
 import Layout from "./containers/Layout/Layout";
 
-function App() {
+function App(props) {
   return (
     <div>
-      <Layout />
+      <Layout urls={props.urls} />
     </div>
   );
 }
