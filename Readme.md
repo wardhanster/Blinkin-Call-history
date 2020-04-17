@@ -1,6 +1,8 @@
 # librarycallhistory
 
-## Install
+## Installation
+
+Add dependencies into package.json
 
 ```INSTALLATION
 "call-hist-lib": "github:mahesh-co1/librarycallhistory.git"
