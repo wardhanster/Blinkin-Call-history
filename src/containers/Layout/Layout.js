@@ -1,121 +1,78 @@
 import React from "react";
 import CallLogs from "../../components/CallLogs/CallLogs";
 import "./Layout.css";
-import { Modal, ModalBody, ModalFooter, Button } from "reactstrap";
+import { Modal, ModalBody, ModalHeader, Button } from "reactstrap";
 
-const token = JSON.parse(localStorage.getItem("@userData")).token;
+const { token } = JSON.parse(localStorage.getItem("@userData"));
+
+const myHeaders = {
+  headers: new Headers({
+    "x-token": token,
+  }),
+};
 
 class Layout extends React.Component {
   state = {
     callData: null,
     showImage: false,
     screenshots: [],
+    loading: false,
+  };
+
+  fetchCall = async (url) => {
+    this.setState({ loading: true });
+    let response = await fetch(url, myHeaders);
+    let res = await response.json();
+    this.setState({ loading: false });
+    return res;
   };
 
   componentDidMount() {
-    fetch("https://staging-framework.blinkin.io/v1/calls/get-own-call-logs", {
-      headers: new Headers({
-        "x-token": token,
-      }),
-    })
-      .then((res) => {
-        console.log(res);
-        return res.json();
-      })
-      .then((res) => {
-        console.log(res);
-        this.setState({ callData: res.data });
-      })
-      .catch((err) => console.log(err));
+    let result = async () => {
+      let res = await this.fetchCall(this.props.urls.baseUrl);
+      this.setState({ callData: res.data });
+      return res;
+    };
+    result();
   }
 
-  loadNextPage = () => {
-    fetch(this.state.callData.next_page_url, {
-      headers: new Headers({
-        "x-token": token,
-      }),
-    })
-      .then((res) => {
-        // console.log(res.json());
-        return res.json();
-      })
-      .then((res) => {
-        console.log(res);
-        this.setState({
-          callData: res.data,
-        });
-      })
-      .catch((err) => console.log(err));
+  handleNextPrevious = async (paginationType) => {
+    let selectPaginationUrl =
+      paginationType === "next"
+        ? this.state.callData.next_page_url
+        : this.state.callData.prev_page_url;
+    let res = await this.fetchCall(selectPaginationUrl);
+    this.setState({ callData: res.data });
   };
 
-  loadPreviousPage = () => {
-    fetch(this.state.callData.prev_page_url, {
-      headers: new Headers({
-        "x-token": token,
-      }),
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        this.setState({ callData: res.data });
-      })
-      .catch((err) => console.log(err));
-  };
-
-  toggleShowImage = () => {
-    let images = [];
+  toggleShowImage = async (roomId) => {
     if (!this.state.showImage) {
-      this.getScreenshots("54-1584007036151").then((res) => {
-        res.data.map((img) => {
-          images.push(
-            "https://blinkin-production.s3.eu-central-1.amazonaws.com/public/images/chat_images/" +
-              img.file_name +
-              img.file_extension
-          );
-        });
+      let screenShots = await this.getScreenshots(roomId);
+      this.setState((prevState) => {
+        return {
+          showImage: !prevState.showImage,
+          screenshots: screenShots.data,
+        };
+      });
+    } else {
+      this.setState((prevState) => {
+        return {
+          showImage: !prevState.showImage,
+        };
       });
     }
-    this.setState((prevState) => {
-      return {
-        showImage: !prevState.showImage,
-        screenshots: images,
-      };
-    });
   };
 
-  getScreenshots = (roomId) => {
-    return fetch(
-      "https://staging-framework.blinkin.io/v1/calls/get-files/" + roomId,
-      {
-        headers: new Headers({
-          "x-token": token,
-        }),
-      }
-    )
-      .then((res) => {
-        return res.json();
-      })
-      .then((res) => {
-        return res.data;
-      });
+  getScreenshots = async (roomId) => {
+    let res = await this.fetchCall(`${this.props.urls.get_files}${roomId}`);
+    let data = await res.data;
+    return data;
   };
 
   render() {
     let callLogs = null;
     let prevButton = null;
     let nextButton = null;
-    let multipleImages = this.state.screenshots.map((img) => {
-      return (
-        <ModalBody>
-          {" "}
-          <img
-            width="400px"
-            style={{ display: "block", margin: "auto" }}
-            src={img}
-          />
-          <ModalFooter>Here At BlinkIn</ModalFooter>
-        </ModalBody>
-      );
-    });
 
     if (this.state.callData) {
       if (this.state.callData.current_page > 1) {
@@ -123,7 +80,7 @@ class Layout extends React.Component {
           <Button
             color="info"
             className="Button"
-            onClick={this.loadPreviousPage}
+            onClick={this.handleNextPrevious.bind(this, "previous")}
           >
             Previous Page
           </Button>
@@ -131,7 +88,11 @@ class Layout extends React.Component {
       }
       if (this.state.callData.current_page !== this.state.callData.last_page) {
         nextButton = (
-          <Button color="info" className="Button" onClick={this.loadNextPage}>
+          <Button
+            color="info"
+            className="Button"
+            onClick={this.handleNextPrevious.bind(this, "next")}
+          >
             Next Page
           </Button>
         );
@@ -141,12 +102,36 @@ class Layout extends React.Component {
           <CallLogs
             content={this.state.callData}
             showImage={this.toggleShowImage}
+            loading={this.state.loading}
           />
+
           {prevButton}
           {this.state.callData.current_page}
           {nextButton}
           <Modal isOpen={this.state.showImage} toggle={this.toggleShowImage}>
-            {multipleImages}
+            <ModalHeader toggle={this.toggleShowImage}>Image</ModalHeader>
+            <ModalBody>
+              {this.state.screenshots.map((img, index) => {
+                let presentUrl = `${this.props.urls.file_base_path}${img.file_name}.${img.file_extension}`;
+                return (
+                  <>
+                    <span>
+                      <small>
+                        {" "}
+                        {`Orginal File Name - ${img.original_name} | File Created At - ${img.created_at}`}
+                      </small>
+                      }
+                    </span>
+                    <img
+                      width="400px"
+                      alt={`${index}_image`}
+                      style={{ display: "block", margin: "auto" }}
+                      src={presentUrl}
+                    />
+                  </>
+                );
+              })}
+            </ModalBody>
           </Modal>
         </div>
       );
