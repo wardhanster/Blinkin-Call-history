@@ -28,9 +28,9 @@ class Example extends Component {
   }
 }
 ```
-baseUrl = For api request
-get_files = get image name and extension for particular room_id
-file_base_path = Api for getting images of particular room_id
+**baseUrl** = For api request  
+**get_files** = get image name and extension for particular room_id  
+**file_base_path** = Api for getting images of particular room_id  
 
 ## License
 
