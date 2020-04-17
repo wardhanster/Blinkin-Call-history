@@ -28,8 +28,7 @@ const callLogs = (props) => {
           <th>
             <i class="fa fa-phone" aria-hidden="true"></i> To
           </th>
-          {/* <th>Create At</th>
-          <th>Updated At</th> */}
+
           <th>Files</th>
         </tr>
       </thead>

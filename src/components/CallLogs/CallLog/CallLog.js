@@ -3,19 +3,11 @@ import "./CallLog.css";
 
 const callLog = (props) => {
   let date = new Date(props.call_start_time);
-  // let startDate = new Date(
-  //   date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate()
-  // );
-  // console.log(startDate.toLocaleString());
-  // let startTime = new Date(
-  //   date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds()
-  // );
 
   return (
     <tr className="calllog__row">
       <td>{props.room_id}</td>
-      {/* <td>{startDate.toString()}</td> */}
-      <td className="text-muted">22 Feb 2020</td>
+      <td className="text-muted">{date.toLocaleDateString()}</td>
       <td>{date.toLocaleTimeString()}</td>
       <td>
         {convertToHMS(
@@ -25,8 +17,7 @@ const callLog = (props) => {
         )}
       </td>
       <td>{props.to_phonenumber}</td>
-      {/* <td>{props.created_at}</td>
-      <td>{props.updated_at}</td> */}
+
       <td>
         {props.files_count ? (
           <i
