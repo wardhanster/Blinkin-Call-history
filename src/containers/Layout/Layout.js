@@ -3,14 +3,6 @@ import CallLogs from "../../components/CallLogs/CallLogs";
 import "./Layout.css";
 import { Modal, ModalBody, ModalHeader, Button } from "reactstrap";
 
-const { token } = JSON.parse(localStorage.getItem("@userData"));
-
-const myHeaders = {
-  headers: new Headers({
-    "x-token": token,
-  }),
-};
-
 class Layout extends React.Component {
   state = {
     callData: null,
@@ -21,15 +13,14 @@ class Layout extends React.Component {
 
   fetchCall = async (url) => {
     this.setState({ loading: true });
-    let response = await fetch(url, myHeaders);
-    let res = await response.json();
+    let response = await this.props.fetchAPI(url);
     this.setState({ loading: false });
-    return res;
+    return response;
   };
 
   componentDidMount() {
     let result = async () => {
-      let res = await this.fetchCall(this.props.urls.baseUrl);
+      let res = await this.fetchCall(this.props.baseUrl);
       this.setState({ callData: res.data });
       return res;
     };
@@ -64,7 +55,7 @@ class Layout extends React.Component {
   };
 
   getScreenshots = async (roomId) => {
-    let res = await this.fetchCall(`${this.props.urls.get_files}${roomId}`);
+    let res = await this.fetchCall(`${this.props.getFiles}${roomId}`);
     let data = await res.data;
     return data;
   };
@@ -106,13 +97,14 @@ class Layout extends React.Component {
           />
 
           {prevButton}
-          {this.state.callData.current_page}
+          {this.state.callData.current_page > 1 &&
+            this.state.callData.current_page}
           {nextButton}
           <Modal isOpen={this.state.showImage} toggle={this.toggleShowImage}>
             <ModalHeader toggle={this.toggleShowImage}>Image</ModalHeader>
             <ModalBody>
               {this.state.screenshots.map((img, index) => {
-                let presentUrl = `${this.props.urls.file_base_path}${img.file_name}.${img.file_extension}`;
+                let presentUrl = `${this.props.fileBasePath}${img.file_name}.${img.file_extension}`;
                 return (
                   <>
                     <span>
