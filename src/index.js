@@ -4,7 +4,12 @@ import Layout from "./containers/Layout/Layout";
 function App(props) {
   return (
     <div>
-      <Layout urls={props.urls} />
+      <Layout
+        baseUrl={props.baseUrl}
+        fileBasePath={props.fileBasePath}
+        getFiles={props.getFiles}
+        fetchAPI={props.fetchAPI}
+      />
     </div>
   );
 }
