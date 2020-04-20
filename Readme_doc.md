@@ -49,3 +49,32 @@ Add Component in your render function
         fetchAPI={fetchAPI}
       />
 ```
+
+Once all the changes are done then run 
+```
+npm run build
+```
+from root folder
+
+Once build is completed run npm link
+```
+npm link
+```
+
+Then link it to the main project(where it will be used)
+```
+npm link {path to the main project}/node_modules/react
+```
+
+Then open the root path of the main project and link CallHistory with it
+```
+cd {path to the main project}
+npm link Blinkin-Call-history
+```
+
+import the file inside your folder and test
+```
+import CallHistory from 'call-hist-lib'
+```
+
+Once everything is working fine open the Blinkin-Call-History project and push it to github using git commands
