@@ -16,3 +16,6 @@
   color: #ddd;
   outline: none;
 }
+.pagination {
+  justify-content: center;
+}
