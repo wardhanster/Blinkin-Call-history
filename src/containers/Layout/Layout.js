@@ -15,10 +15,10 @@ class Layout extends React.Component {
     pageNum: 1,
   };
 
-  fetchCall = async (url) => {
+  fetchCall = async (pageNum) => {
     if (mounted) {
       this.setState({ loading: true });
-      let response = await this.props.fetchAPI(url);
+      let response = await this.props.fetchAPI(pageNum);
       if (mounted) {
         this.setState({ loading: false });
         return response;
@@ -28,7 +28,7 @@ class Layout extends React.Component {
 
   async componentDidMount() {
     mounted = true;
-    let res = await this.fetchCall(this.props.baseUrl);
+    let res = await this.fetchCall(this.state.pageNum);
     this.setState({ callData: res.data });
   }
 
@@ -60,7 +60,7 @@ class Layout extends React.Component {
   };
 
   handleCount = async (pageCount) => {
-    let res = await this.fetchCall(`${this.props.baseUrl}?page=${pageCount}`);
+    let res = await this.fetchCall(pageCount);
     this.setState({ callData: res.data, pageNum: pageCount });
   };
 
