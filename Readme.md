@@ -1,5 +1,3 @@
-# librarycallhistory
-
 ## Installation
 
 Add dependencies into package.json
@@ -57,9 +55,9 @@ let getFilesAPI = async (roomId) => {
 ```
 ### Note - Since get-own-call-logs maintains page_num count replaced all baseURL to just pageNumber. Because of that out fetchAPI will handel now only for mail url with pageNumber (get-own-call-logs)
 
-### Maintained new api for get all files location - getFilesAPI
+**Maintained new api for get all files location - getFilesAPI**
 
-## URL Props details
+#### URL Props details
 
 **baseUrl** = For api request  
 **get_files** = get image name and extension for particular room_id  
