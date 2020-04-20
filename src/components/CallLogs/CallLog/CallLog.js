@@ -6,8 +6,9 @@ const callLog = (props) => {
   return (
     <tr className="calllog__row">
       <td>{props.room_id}</td>
-      <td className="text-muted">{date.toLocaleDateString()}</td>
-      <td>{date.toLocaleTimeString()}</td>
+      <td className="text-muted">
+        {date.toLocaleDateString()} {date.toLocaleTimeString()}
+      </td>
       <td>
         {convertToHMS(
           (new Date(props.call_end_time).getTime() -
@@ -15,7 +16,13 @@ const callLog = (props) => {
             1000
         )}
       </td>
-      <td>{props.to_phonenumber}</td>
+      <td>
+        {props.to_phonenumber === null ? (
+          <span className="text-muted">None</span>
+        ) : (
+          props.to_phonenumber
+        )}
+      </td>
 
       <td>
         {props.files_count ? (
@@ -24,20 +31,25 @@ const callLog = (props) => {
             className="fa fa-file-image-o showFiles"
             aria-hidden="true"
           ></i>
-        ) : null}
+        ) : (
+          "None"
+        )}
       </td>
     </tr>
   );
 };
 
 function convertToHMS(seconds) {
+  if (seconds <= 0) {
+    return "None";
+  }
   seconds = Number(seconds);
   let h = Math.floor(seconds / 3600);
   let m = Math.floor((seconds % 3600) / 60);
   let s = Math.floor((seconds % 3600) % 60);
-  h = h > 0 ? h + (h === 1 ? "hr " : "hrs ") : "";
-  m = m > 0 ? m + (m === 1 ? "min " : "mins ") : "";
-  s = s > 0 ? s + "sec" : "";
+  h = h > 0 ? h + (h === 1 ? " hr " : " hrs ") : "";
+  m = m > 0 ? m + (m === 1 ? " min " : " mins ") : "";
+  s = s > 0 ? s + " sec" : "";
   return h + m + s;
 }
 
