@@ -13,26 +13,41 @@ Add dependencies into package.json
 
 ```js
 
-const urls = {
-  baseUrl: "https://staging-framework.blinkin.io/v1/calls/get-own-call-logs",
-  file_base_path:
-    "https://blinkin-staging.s3.eu-central-1.amazonaws.com/public/images/chat_images/",
-  get_files: "https://staging-framework.blinkin.io/v1/calls/get-files/",
-};
+const baseUrl =
+  "https://staging-framework.blinkin.io/v1/calls/get-own-call-logs";
+const fileBasePath =
+  "https://blinkin-staging.s3.eu-central-1.amazonaws.com/public/images/chat_images/";
+const getFiles = "https://staging-framework.blinkin.io/v1/calls/get-files/";
 
 import React, { Component } from "react";
 import CallHistory from "call-hist-lib";
 class Example extends Component {
   render() {
-    return <CallHistory urls={urls}/>;
+   return (
+    <CallHistory
+      baseUrl={baseUrl}
+      fileBasePath={fileBasePath}
+      getFiles={getFiles}
+      fetchAPI={fetchAPI}
+    />
+  );
   }
 }
 ```
-## Props details
+## URL Props details
 
 **baseUrl** = For api request  
 **get_files** = get image name and extension for particular room_id  
 **file_base_path** = Api for getting images of particular room_id  
+
+## Handling FetchAPI call props
+```js
+let fetchAPI = async (url) => {
+  let response = await fetch(url, myHeaders);
+  let res = await response.json();
+  return res;
+};
+```
 
 ## License
 
