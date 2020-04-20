@@ -1,40 +1,40 @@
 import React from "react";
 import CallLogs from "../../components/CallLogs/CallLogs";
 import "./Layout.css";
-import { Modal, ModalBody, ModalHeader, Button } from "reactstrap";
+import { Modal, ModalBody } from "reactstrap";
 
+import ModalPreview from "../../components/ModalPreview";
+
+let mounted = false;
 class Layout extends React.Component {
   state = {
     callData: null,
     showImage: false,
     screenshots: [],
     loading: false,
+    pageNum: 1,
   };
 
   fetchCall = async (url) => {
-    this.setState({ loading: true });
-    let response = await this.props.fetchAPI(url);
-    this.setState({ loading: false });
-    return response;
+    if (mounted) {
+      this.setState({ loading: true });
+      let response = await this.props.fetchAPI(url);
+      if (mounted) {
+        this.setState({ loading: false });
+        return response;
+      }
+    }
   };
 
-  componentDidMount() {
-    let result = async () => {
-      let res = await this.fetchCall(this.props.baseUrl);
-      this.setState({ callData: res.data });
-      return res;
-    };
-    result();
+  async componentDidMount() {
+    mounted = true;
+    let res = await this.fetchCall(this.props.baseUrl);
+    this.setState({ callData: res.data });
   }
 
-  handleNextPrevious = async (paginationType) => {
-    let selectPaginationUrl =
-      paginationType === "next"
-        ? this.state.callData.next_page_url
-        : this.state.callData.prev_page_url;
-    let res = await this.fetchCall(selectPaginationUrl);
-    this.setState({ callData: res.data });
-  };
+  componentWillUnmount() {
+    mounted = false;
+  }
 
   toggleShowImage = async (roomId) => {
     if (!this.state.showImage) {
@@ -55,39 +55,19 @@ class Layout extends React.Component {
   };
 
   getScreenshots = async (roomId) => {
-    let res = await this.fetchCall(`${this.props.getFiles}${roomId}`);
-    let data = await res.data;
-    return data;
+    let res = await this.props.getFilesAPI(roomId);
+    return res;
+  };
+
+  handleCount = async (pageCount) => {
+    let res = await this.fetchCall(`${this.props.baseUrl}?page=${pageCount}`);
+    this.setState({ callData: res.data, pageNum: pageCount });
   };
 
   render() {
     let callLogs = null;
-    let prevButton = null;
-    let nextButton = null;
 
     if (this.state.callData) {
-      if (this.state.callData.current_page > 1) {
-        prevButton = (
-          <Button
-            color="info"
-            className="Button"
-            onClick={this.handleNextPrevious.bind(this, "previous")}
-          >
-            Previous Page
-          </Button>
-        );
-      }
-      if (this.state.callData.current_page !== this.state.callData.last_page) {
-        nextButton = (
-          <Button
-            color="info"
-            className="Button"
-            onClick={this.handleNextPrevious.bind(this, "next")}
-          >
-            Next Page
-          </Button>
-        );
-      }
       callLogs = (
         <div>
           <CallLogs
@@ -95,34 +75,17 @@ class Layout extends React.Component {
             showImage={this.toggleShowImage}
             loading={this.state.loading}
           />
-
-          {prevButton}
-          {this.state.callData.current_page > 1 &&
-            this.state.callData.current_page}
-          {nextButton}
-          <Modal isOpen={this.state.showImage} toggle={this.toggleShowImage}>
-            <ModalHeader toggle={this.toggleShowImage}>Image</ModalHeader>
+          {this.props.Paginator(this.state.callData, this.handleCount)}
+          <Modal
+            className="modal-xl"
+            isOpen={this.state.showImage}
+            toggle={this.toggleShowImage}
+          >
             <ModalBody>
-              {this.state.screenshots.map((img, index) => {
-                let presentUrl = `${this.props.fileBasePath}${img.file_name}.${img.file_extension}`;
-                return (
-                  <>
-                    <span>
-                      <small>
-                        {" "}
-                        {`Orginal File Name - ${img.original_name} | File Created At - ${img.created_at}`}
-                      </small>
-                      }
-                    </span>
-                    <img
-                      width="400px"
-                      alt={`${index}_image`}
-                      style={{ display: "block", margin: "auto" }}
-                      src={presentUrl}
-                    />
-                  </>
-                );
-              })}
+              <ModalPreview
+                fileBasePath={this.props.fileBasePath}
+                previewData={this.state.screenshots}
+              />
             </ModalBody>
           </Modal>
         </div>
