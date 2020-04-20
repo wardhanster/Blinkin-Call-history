@@ -66,5 +66,4 @@ let getFilesAPI = async (roomId) => {
 **file_base_path** = Api for getting images of particular room_id  
 
 ## License
-
-MIT © [Maheshss1](https://github.com/Maheshss1)
+NOT AVAILABLE FOR ANY UNAUTHORISED USE
