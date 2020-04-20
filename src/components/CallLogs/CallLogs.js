@@ -16,7 +16,7 @@ const callLogs = (props) => {
           <Spinner style={{ width: "3rem", height: "3rem" }} />
         </div>
       )}
-      <Table style={{ width: 1000, margin: "auto" }}>
+      <Table>
         <thead className="calllogs__thead">
           <tr>
             <th>
@@ -25,10 +25,10 @@ const callLogs = (props) => {
             <th>
               <i className="fa fa-calendar" aria-hidden="true"></i> Start Date
             </th>
-            <th>
+            {/* <th>
               <i className="fa fa-hourglass-end" aria-hidden="true"></i> Start
               Time
-            </th>
+            </th> */}
             <th>
               <i className="fa fa-clock-o" aria-hidden="true"></i> Duration
             </th>
