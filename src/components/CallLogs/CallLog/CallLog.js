@@ -5,7 +5,12 @@ const callLog = (props) => {
   let date = new Date(props.call_start_time);
   return (
     <tr className="calllog__row">
-      <td>{props.room_id}</td>
+      <td
+        className={props.files_count ? "room_id_active" : ""}
+        onClick={() => props.showImage(props.room_id)}
+      >
+        {props.room_id}
+      </td>
       <td className="text-muted">
         {date.toLocaleDateString()} {date.toLocaleTimeString()}
       </td>
@@ -18,7 +23,7 @@ const callLog = (props) => {
       </td>
       <td>
         {props.to_phonenumber === null ? (
-          <span className="text-muted">None</span>
+          <span className="text-muted">N/A</span>
         ) : (
           props.to_phonenumber
         )}
@@ -32,7 +37,7 @@ const callLog = (props) => {
             aria-hidden="true"
           ></i>
         ) : (
-          "None"
+          "N/A"
         )}
       </td>
     </tr>
@@ -41,7 +46,7 @@ const callLog = (props) => {
 
 function convertToHMS(seconds) {
   if (seconds <= 0) {
-    return "None";
+    return "N/A";
   }
   seconds = Number(seconds);
   let h = Math.floor(seconds / 3600);
