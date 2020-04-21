@@ -1,7 +1,7 @@
 import React from "react";
 import CallLogs from "../../components/CallLogs/CallLogs";
 import "./Layout.css";
-import { Modal, ModalBody } from "reactstrap";
+import { Modal, ModalBody, ModalFooter, Button } from "reactstrap";
 
 import ModalPreview from "../../components/ModalPreview";
 
@@ -17,6 +17,8 @@ class Layout extends React.Component {
 
   fetchCall = async (pageNum) => {
     if (mounted) {
+      document.body.scrollTop = 0; // For Safari
+      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
       this.setState({ loading: true });
       let response = await this.props.fetchAPI(pageNum);
       if (mounted) {
@@ -38,10 +40,14 @@ class Layout extends React.Component {
 
   toggleShowImage = async (roomId) => {
     if (!this.state.showImage) {
-      let screenShots = await this.getScreenshots(roomId);
       this.setState((prevState) => {
         return {
           showImage: !prevState.showImage,
+        };
+      });
+      let screenShots = await this.getScreenshots(roomId);
+      this.setState((prevState) => {
+        return {
           screenshots: screenShots.data,
         };
       });
@@ -87,6 +93,11 @@ class Layout extends React.Component {
                 previewData={this.state.screenshots}
               />
             </ModalBody>
+            <ModalFooter>
+              <Button color="secondary" onClick={this.toggleShowImage}>
+                Cancel
+              </Button>
+            </ModalFooter>
           </Modal>
         </div>
       );
