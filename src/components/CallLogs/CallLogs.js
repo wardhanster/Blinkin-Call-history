@@ -19,24 +19,20 @@ const callLogs = (props) => {
       <Table>
         <thead className="calllogs__thead">
           <tr>
-            <th>
+            <th className="default_width">
               <i className="fa fa-id-card-o" aria-hidden="true"></i> Room ID
             </th>
-            <th>
+            <th className="default_width">
               <i className="fa fa-calendar" aria-hidden="true"></i> Start Date
             </th>
-            {/* <th>
-              <i className="fa fa-hourglass-end" aria-hidden="true"></i> Start
-              Time
-            </th> */}
-            <th>
+            <th className="default_width">
               <i className="fa fa-clock-o" aria-hidden="true"></i> Duration
             </th>
-            <th>
+            <th className="width_50">
               <i className="fa fa-phone" aria-hidden="true"></i> To
             </th>
 
-            <th>Files</th>
+            <th className="width_50">Files</th>
           </tr>
         </thead>
         <tbody>{tableRows}</tbody>
