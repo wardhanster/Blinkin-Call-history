@@ -1,14 +1,8 @@
-.showFiles {
-  margin: 0;
-}
-
-.showFiles:hover {
-  text-decoration: underline;
+.showFiles,
+.room_id_active {
   cursor: pointer;
   color: blue;
 }
-
-.calllog__row td {
-  font-size: 14px;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+.room_id_active:hover {
+  text-decoration: underline;
 }
