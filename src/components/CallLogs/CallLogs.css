@@ -1,7 +1,6 @@
-.calllogs__thead {
+.default_width {
+  width: 14%;
 }
-
-.calllogs__thead th {
-  font-size: small;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+.width_50 {
+  width: 20%;
 }
