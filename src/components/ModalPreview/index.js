@@ -65,7 +65,7 @@ export default function ModalPreview(props) {
 
   return (
     <div>
-      <Nav tabs>
+      <Nav tabs className="modal__tabs">
         <NavItem>
           <NavLink
             className={classnames({ active: activeTab === "1" })}
@@ -120,11 +120,13 @@ export default function ModalPreview(props) {
                       />
                     );
                   })}
-                {props.previewData.filter(
-                  (e) =>
-                    image.indexOf(e.file_extension.toLocaleLowerCase()) !== -1
-                ) && "No Images Exist"}
               </div>
+              {props.previewData.filter(
+                (e) =>
+                  image.indexOf(e.file_extension.toLocaleLowerCase()) !== -1
+              ).length > 0
+                ? ""
+                : "No Images Exist"}
             </Col>
           </Row>
         </TabPane>
@@ -147,7 +149,9 @@ export default function ModalPreview(props) {
               })}
             {props.previewData.filter(
               (e) => video.indexOf(e.file_extension.toLocaleLowerCase()) !== -1
-            ) && "No Video Files Exist"}
+            ).length > 0
+              ? ""
+              : "No Video Files Exist"}
           </div>
         </TabPane>
         <TabPane tabId="3">
@@ -180,7 +184,9 @@ export default function ModalPreview(props) {
               (e) =>
                 video.indexOf(e.file_extension.toLocaleLowerCase()) !== -1 &&
                 image.indexOf(e.file_extension.toLocaleLowerCase()) !== -1
-            ) && "No Files Exist"}
+            ).length > 0
+              ? ""
+              : "No Files Exist"}
           </div>
         </TabPane>
       </TabContent>
