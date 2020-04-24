@@ -2,12 +2,18 @@ import React from "react";
 import "./CallLog.css";
 
 const callLog = (props) => {
+  let handleClick = (file_count, room_id) => {
+    if (file_count > 0) {
+      props.showImage(room_id);
+    }
+  };
+
   let date = new Date(props.call_start_time);
   return (
     <tr className="calllog__row">
       <td
         className={props.files_count ? "room_id_active" : ""}
-        onClick={() => props.showImage(props.room_id)}
+        onClick={() => handleClick(props.files_count, props.room_id)}
       >
         {props.room_id}
       </td>
