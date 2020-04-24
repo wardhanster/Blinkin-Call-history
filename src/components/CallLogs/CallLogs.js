@@ -16,7 +16,7 @@ const callLogs = (props) => {
           <Spinner style={{ width: "3rem", height: "3rem" }} />
         </div>
       )}
-      <Table>
+      <Table hover>
         <thead className="calllogs__thead">
           <tr>
             <th className="default_width">
