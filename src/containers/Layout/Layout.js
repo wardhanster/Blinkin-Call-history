@@ -95,7 +95,7 @@ class Layout extends React.Component {
             </ModalBody>
             <ModalFooter>
               <Button color="secondary" onClick={this.toggleShowImage}>
-                Close
+                {window.String.CH_close || "Close"}
               </Button>
             </ModalFooter>
           </Modal>
