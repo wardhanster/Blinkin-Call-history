@@ -73,7 +73,7 @@ export default function ModalPreview(props) {
               toggle("1");
             }}
           >
-            Images
+            {window.String.CH_images || "Images"}
           </NavLink>
         </NavItem>
         <NavItem>
@@ -83,7 +83,7 @@ export default function ModalPreview(props) {
               toggle("2");
             }}
           >
-            Videos
+            {window.String.CH_videos || "Videos"}
           </NavLink>
         </NavItem>
         <NavItem>
@@ -93,7 +93,7 @@ export default function ModalPreview(props) {
               toggle("3");
             }}
           >
-            Files
+            {window.String.CH_files || "Files"}
           </NavLink>
         </NavItem>
       </Nav>
@@ -126,7 +126,7 @@ export default function ModalPreview(props) {
                   image.indexOf(e.file_extension.toLocaleLowerCase()) !== -1
               ).length > 0
                 ? ""
-                : "No Images Exist"}
+                : window.String.CH_noImagesExist || "No Images Exist"}
             </Col>
           </Row>
         </TabPane>
@@ -151,7 +151,7 @@ export default function ModalPreview(props) {
               (e) => video.indexOf(e.file_extension.toLocaleLowerCase()) !== -1
             ).length > 0
               ? ""
-              : "No Video Files Exist"}
+              : window.String.CH_noVideosExist || "No Videos Exist"}
           </div>
         </TabPane>
         <TabPane tabId="3">
@@ -174,7 +174,8 @@ export default function ModalPreview(props) {
                         href={presentUrl}
                         target="_blank"
                       >
-                        Goto File location
+                        {window.String.CH_gotoFileLocation ||
+                          "Goto File location"}
                       </a>
                     </Card>
                   </Col>
@@ -186,7 +187,7 @@ export default function ModalPreview(props) {
                 image.indexOf(e.file_extension.toLocaleLowerCase()) !== -1
             ).length > 0
               ? ""
-              : "No Files Exist"}
+              : window.String.CH_noFilesExist || "No Files Exist"}
           </div>
         </TabPane>
       </TabContent>
