@@ -5,10 +5,6 @@ import "./CallLogs.css";
 import { Table, Spinner } from "reactstrap";
 
 const callLogs = (props) => {
-  const tableRows = props.content.data.map((cont) => {
-    return <CallLog key={cont.room_id} {...cont} showImage={props.showImage} />;
-  });
-
   return (
     <>
       {props.loading && (
@@ -20,22 +16,36 @@ const callLogs = (props) => {
         <thead className="calllogs__thead">
           <tr>
             <th className="default_width">
-              <i className="fa fa-id-card-o" aria-hidden="true"></i> Room ID
+              <i className="fa fa-id-card-o" aria-hidden="true"></i>
+              {window.String.CH_roomId || " Room ID"}
             </th>
             <th className="default_width">
-              <i className="fa fa-calendar" aria-hidden="true"></i> Start Date
+              <i className="fa fa-calendar" aria-hidden="true"></i>
+              {window.String.CH_startDate || " Start Date"}
             </th>
             <th className="default_width">
-              <i className="fa fa-clock-o" aria-hidden="true"></i> Duration
+              <i className="fa fa-clock-o" aria-hidden="true"></i>
+              {window.String.CH_duration || " Duration"}
             </th>
             <th className="width_50">
-              <i className="fa fa-phone" aria-hidden="true"></i> To
+              <i className="fa fa-phone" aria-hidden="true"></i>
+              {window.String.CH_to || "To"}
             </th>
 
-            <th className="width_50">Files</th>
+            <th className="width_50">{window.String.CH_files || " Files"}</th>
           </tr>
         </thead>
-        <tbody>{tableRows}</tbody>
+        <tbody>
+          {props.content.data.map((cont) => {
+            return (
+              <CallLog
+                key={cont.room_id}
+                {...cont}
+                showImage={props.showImage}
+              />
+            );
+          })}
+        </tbody>
       </Table>
     </>
   );
