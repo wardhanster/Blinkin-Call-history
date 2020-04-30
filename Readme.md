@@ -63,5 +63,23 @@ let getFilesAPI = async (roomId) => {
 **get_files** = get image name and extension for particular room_id  
 **file_base_path** = Api for getting images of particular room_id  
 
+### window key handled
+
+```js
+window.String.CH_roomId || 'Room Id'
+window.String.CH_startDate || 'Start Date'
+window.String.CH_duration || 'Duration'
+window.String.CH_to || 'To'
+window.String.CH_files || 'Files'
+window.String.CH_images || 'Images'
+window.String.CH_videos || 'Videos'
+window.String.CH_close || 'Close'
+window.String.CH_noImagesExist || 'No Images Exist'
+window.String.CH_noVideosExist || 'No Videos Exist'
+window.String.CH_gotoFileLocation || 'Goto File location'
+window.String.CH_noFilesExist || 'No Files Exist'
+```
+
+
 ## License
 NOT AVAILABLE FOR ANY UNAUTHORISED USE
