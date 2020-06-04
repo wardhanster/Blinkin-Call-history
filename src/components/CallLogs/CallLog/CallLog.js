@@ -1,14 +1,21 @@
 import React from "react";
 import "./CallLog.css";
 
-const callLog = (props) => {
+const setCorrectTimeZone = date => {
+  let a = new Date(date);
+  let timeZoneDifference = a.getTimezoneOffset();
+  a.setMinutes(a.getMinutes() - timeZoneDifference);
+  return a;
+};
+
+const callLog = props => {
   let handleClick = (file_count, room_id) => {
     if (file_count > 0) {
       props.showImage(room_id);
     }
   };
 
-  let date = new Date(props.call_start_time);
+  let date = new Date(setCorrectTimeZone(props.call_start_time));
   return (
     <tr className="calllog__row">
       <td
