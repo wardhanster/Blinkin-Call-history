@@ -55,6 +55,7 @@ class Layout extends React.Component {
       this.setState((prevState) => {
         return {
           showImage: !prevState.showImage,
+          screenshots: [],
         };
       });
     }
