@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   TabContent,
   TabPane,
@@ -11,6 +11,7 @@ import {
   CardTitle,
   CardText,
   Spinner,
+  Badge,
 } from "reactstrap";
 import classnames from "classnames";
 
@@ -39,6 +40,7 @@ let video = [
   "3gp",
   "x-ms-video",
   "video",
+  "mov",
 ];
 
 function Loading() {
@@ -51,7 +53,10 @@ function Loading() {
 
 export default function ModalPreview(props) {
   const [activeTab, setActiveTab] = useState("1");
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [imageCount, setImageCount] = useState(null);
+  const [videoCount, setVideoCount] = useState(null);
+  const [othersCount, setOthersCount] = useState(null);
 
   const toggle = (tab) => {
     if (activeTab !== tab) setActiveTab(tab);
@@ -62,6 +67,23 @@ export default function ModalPreview(props) {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    let img = props.previewData.filter(
+      (e) => image.indexOf(e.file_extension.toLocaleLowerCase()) !== -1
+    );
+    let videos = props.previewData.filter(
+      (e) => video.indexOf(e.file_extension.toLocaleLowerCase()) !== -1
+    );
+    let others = props.previewData.filter(
+      (e) =>
+        video.indexOf(e.file_extension.toLocaleLowerCase()) !== -1 &&
+        image.indexOf(e.file_extension.toLocaleLowerCase()) !== -1
+    );
+    setImageCount(img.length);
+    setVideoCount(videos.length);
+    setOthersCount(others.length);
+  }, [props.previewData]);
 
   return (
     <div>
@@ -74,6 +96,9 @@ export default function ModalPreview(props) {
             }}
           >
             {window.String.CH_images || "Images"}
+            <span className="p-2">
+              <Badge color="secondary">{imageCount}</Badge>
+            </span>
           </NavLink>
         </NavItem>
         <NavItem>
@@ -84,6 +109,9 @@ export default function ModalPreview(props) {
             }}
           >
             {window.String.CH_videos || "Videos"}
+            <span className="p-2">
+              <Badge color="secondary">{videoCount}</Badge>
+            </span>
           </NavLink>
         </NavItem>
         <NavItem>
@@ -94,6 +122,9 @@ export default function ModalPreview(props) {
             }}
           >
             {window.String.CH_files || "Files"}
+            <span className="p-2">
+              <Badge color="secondary">{othersCount}</Badge>
+            </span>
           </NavLink>
         </NavItem>
       </Nav>
