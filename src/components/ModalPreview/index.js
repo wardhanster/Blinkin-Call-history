@@ -134,23 +134,27 @@ export default function ModalPreview(props) {
           <Row>
             <Col sm="12">
               <div className="tab-all preview_image">
-                {props.previewData
-                  .filter(
-                    (e) =>
-                      image.indexOf(e.file_extension.toLocaleLowerCase()) !== -1
-                  )
-                  .map((imageItem, index) => {
-                    let presentUrl = `${props.fileBasePath}${imageItem.file_name}.${imageItem.file_extension}`;
-                    return (
-                      <img
-                        key={`${index}_image`}
-                        className="img-fluid"
-                        alt={`${index}_image`}
-                        onLoad={stopLoading}
-                        src={presentUrl}
-                      />
-                    );
-                  })}
+                <div>
+                  {props.previewData
+                    .filter(
+                      (e) =>
+                        image.indexOf(e.file_extension.toLocaleLowerCase()) !==
+                        -1
+                    )
+                    .map((imageItem, index) => {
+                      let presentUrl = `${props.fileBasePath}${imageItem.file_name}.${imageItem.file_extension}`;
+                      return (
+                        <div className="m-1">
+                          <img
+                            key={`${index}_image`}
+                            alt={`${index}_image`}
+                            onLoad={stopLoading}
+                            src={presentUrl}
+                          />
+                        </div>
+                      );
+                    })}
+                </div>
               </div>
               {props.previewData.filter(
                 (e) =>
@@ -171,7 +175,13 @@ export default function ModalPreview(props) {
               .map((item, index) => {
                 let presentUrl = `${props.fileBasePath}${item.file_name}.${item.file_extension}`;
                 return (
-                  <video key={index} width="320" height="240" controls>
+                  <video
+                    key={index}
+                    width="320"
+                    height="240"
+                    controls
+                    className="video"
+                  >
                     <source src={presentUrl} type="video/mp4" />
                     <source src={presentUrl} type="video/ogg" />
                     Your browser does not support the video tag.
