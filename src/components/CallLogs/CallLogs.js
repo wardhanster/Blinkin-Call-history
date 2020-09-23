@@ -16,19 +16,19 @@ const callLogs = (props) => {
         <thead className="calllogs__thead">
           <tr>
             <th className="default_width">
-              <i className="fa fa-id-card-o" aria-hidden="true"></i>
+              <i className="fa fa-id-card-o pr-2" aria-hidden="true"></i>
               {window.strings.CH_roomId || " Room ID"}
             </th>
             <th className="default_width">
-              <i className="fa fa-calendar" aria-hidden="true"></i>
+              <i className="fa fa-calendar pr-2" aria-hidden="true"></i>
               {window.strings.CH_startDate || " Start Date"}
             </th>
             <th className="default_width">
-              <i className="fa fa-clock-o" aria-hidden="true"></i>
+              <i className="fa fa-clock-o pr-2" aria-hidden="true"></i>
               {window.strings.CH_duration || " Duration"}
             </th>
             <th className="width_50">
-              <i className="fa fa-phone" aria-hidden="true"></i>
+              <i className="fa fa-phone pr-2" aria-hidden="true"></i>
               {window.strings.CH_to || "To"}
             </th>
 
