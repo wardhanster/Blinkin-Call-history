@@ -17,22 +17,22 @@ const callLogs = (props) => {
           <tr>
             <th className="default_width">
               <i className="fa fa-id-card-o" aria-hidden="true"></i>
-              {window.String.CH_roomId || " Room ID"}
+              {window.strings.CH_roomId || " Room ID"}
             </th>
             <th className="default_width">
               <i className="fa fa-calendar" aria-hidden="true"></i>
-              {window.String.CH_startDate || " Start Date"}
+              {window.strings.CH_startDate || " Start Date"}
             </th>
             <th className="default_width">
               <i className="fa fa-clock-o" aria-hidden="true"></i>
-              {window.String.CH_duration || " Duration"}
+              {window.strings.CH_duration || " Duration"}
             </th>
             <th className="width_50">
               <i className="fa fa-phone" aria-hidden="true"></i>
-              {window.String.CH_to || "To"}
+              {window.strings.CH_to || "To"}
             </th>
 
-            <th className="width_50">{window.String.CH_files || " Files"}</th>
+            <th className="width_50">{window.strings.CH_files || " Files"}</th>
           </tr>
         </thead>
         <tbody>
