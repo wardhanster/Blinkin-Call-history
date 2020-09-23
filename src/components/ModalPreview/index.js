@@ -95,7 +95,7 @@ export default function ModalPreview(props) {
               toggle("1");
             }}
           >
-            {window.String.CH_images || "Images"}
+            {window.strings.CH_images || "Images"}
             <span className="p-2">
               <Badge color="secondary">{imageCount}</Badge>
             </span>
@@ -108,7 +108,7 @@ export default function ModalPreview(props) {
               toggle("2");
             }}
           >
-            {window.String.CH_videos || "Videos"}
+            {window.strings.CH_videos || "Videos"}
             <span className="p-2">
               <Badge color="secondary">{videoCount}</Badge>
             </span>
@@ -121,7 +121,7 @@ export default function ModalPreview(props) {
               toggle("3");
             }}
           >
-            {window.String.CH_files || "Files"}
+            {window.strings.CH_files || "Files"}
             <span className="p-2">
               <Badge color="secondary">{othersCount}</Badge>
             </span>
@@ -161,7 +161,7 @@ export default function ModalPreview(props) {
                   image.indexOf(e.file_extension.toLocaleLowerCase()) !== -1
               ).length > 0
                 ? ""
-                : window.String.CH_noImagesExist || "No Images Exist"}
+                : window.strings.CH_noImagesExist || "No Images Exist"}
             </Col>
           </Row>
         </TabPane>
@@ -192,7 +192,7 @@ export default function ModalPreview(props) {
               (e) => video.indexOf(e.file_extension.toLocaleLowerCase()) !== -1
             ).length > 0
               ? ""
-              : window.String.CH_noVideosExist || "No Videos Exist"}
+              : window.strings.CH_noVideosExist || "No Videos Exist"}
           </div>
         </TabPane>
         <TabPane tabId="3">
@@ -215,7 +215,7 @@ export default function ModalPreview(props) {
                         href={presentUrl}
                         target="_blank"
                       >
-                        {window.String.CH_gotoFileLocation ||
+                        {window.strings.CH_gotoFileLocation ||
                           "Goto File location"}
                       </a>
                     </Card>
@@ -228,7 +228,7 @@ export default function ModalPreview(props) {
                 image.indexOf(e.file_extension.toLocaleLowerCase()) !== -1
             ).length > 0
               ? ""
-              : window.String.CH_noFilesExist || "No Files Exist"}
+              : window.strings.CH_noFilesExist || "No Files Exist"}
           </div>
         </TabPane>
       </TabContent>
