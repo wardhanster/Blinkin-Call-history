@@ -42,6 +42,7 @@ const callLogs = (props) => {
                 key={cont.room_id}
                 {...cont}
                 showImage={props.showImage}
+                getTimeZone={props.getTimeZone}
               />
             );
           })}
