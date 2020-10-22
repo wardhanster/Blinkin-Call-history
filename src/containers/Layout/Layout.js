@@ -81,6 +81,7 @@ class Layout extends React.Component {
             content={this.state.callData}
             showImage={this.toggleShowImage}
             loading={this.state.loading}
+            getTimeZone={this.props.getTimeZone}
           />
           {this.props.Paginator(this.state.callData, this.handleCount)}
           <Modal
