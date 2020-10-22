@@ -1,14 +1,14 @@
 import React from "react";
 import "./CallLog.css";
 
-const setCorrectTimeZone = date => {
+const setCorrectTimeZone = (date) => {
   let a = new Date(date);
   let timeZoneDifference = a.getTimezoneOffset();
   a.setMinutes(a.getMinutes() - timeZoneDifference);
   return a;
 };
 
-const callLog = props => {
+const callLog = (props) => {
   let handleClick = (file_count, room_id) => {
     if (file_count > 0) {
       props.showImage(room_id);
@@ -24,9 +24,7 @@ const callLog = props => {
       >
         {props.room_id}
       </td>
-      <td className="text-muted">
-        {date.toLocaleDateString()} {date.toLocaleTimeString()}
-      </td>
+      <td className="text-muted">{props.getTimeZone(props.call_start_time)}</td>
       <td>
         {convertToHMS(
           (new Date(props.call_end_time).getTime() -
