@@ -6,7 +6,7 @@ export default function ChatPreview({ msg }) {
   return (
     <div className="jumbotron m-0 p-0 bg-transparent">
       <div className="row m-0 p-0 ">
-        <div className="col-12 p-0 m-0 right-0">
+        <div className="col-7 p-0 m-0 right-0 mx-auto">
           <div className="card border-0 rounded rounded-item">
             <div className="card bg-sohbet border-0 m-0 p-0 h-100-val">
               <div

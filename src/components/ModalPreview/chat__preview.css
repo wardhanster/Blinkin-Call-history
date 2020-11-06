@@ -21,7 +21,7 @@ label {
   color: #fff !important;
   border-radius: 20px 20px 3px 20px;
   display: block;
-  max-width: 75%;
+  max-width: 55%;
   padding: 7px 13px 7px 13px;
 }
 
@@ -40,7 +40,7 @@ label {
   color: #000 !important;
   border-radius: 20px 20px 20px 3px;
   display: block;
-  max-width: 75%;
+  max-width: 55%;
   padding: 7px 13px 7px 13px;
 }
 
