@@ -3,16 +3,6 @@ import "./chat__preview.css";
 import ChatBubble from "./ChatBubble";
 
 export default function ChatPreview({ msg }) {
-  const evalMessages = (item) => {
-    const d = item.message;
-    let type = "recieved";
-    if (d.from === this.props.selfType) {
-      type = "sent";
-    }
-
-    return { type, message: d.data.message, from: item.fromName };
-  };
-
   return (
     <div className="jumbotron m-0 p-0 bg-transparent">
       <div className="row m-0 p-0 ">
@@ -24,8 +14,10 @@ export default function ChatPreview({ msg }) {
                 className="card border-0 m-0 p-0 position-relative bg-transparent overflow-a"
               >
                 {msg &&
-                  msg.map((item) => {
-                    return <ChatBubble msgData={item} />;
+                  msg.map((item, index) => {
+                    return (
+                      <ChatBubble key={`${index}_chatItem`} msgData={item} />
+                    );
                   })}
               </div>
             </div>
