@@ -14,6 +14,7 @@ import {
   Badge,
 } from "reactstrap";
 import classnames from "classnames";
+import ChatPreview from "./ChatPreview";
 
 import "./modal_preview.css";
 
@@ -57,6 +58,7 @@ export default function ModalPreview(props) {
   const [imageCount, setImageCount] = useState(null);
   const [videoCount, setVideoCount] = useState(null);
   const [othersCount, setOthersCount] = useState(null);
+  const [msg, setMsg] = useState(null);
 
   const toggle = (tab) => {
     if (activeTab !== tab) setActiveTab(tab);
@@ -84,6 +86,19 @@ export default function ModalPreview(props) {
     setVideoCount(videos.length);
     setOthersCount(others.length);
   }, [props.previewData]);
+
+  useEffect(() => {
+    const getCallhistory = async () => {
+      let res = await props.getChatHistory();
+      if (res.message === "success") {
+        setMsg(res.chat);
+      }
+    };
+    getCallhistory();
+    return () => {
+      console.log(document.getElementsByClassName("video")[0]);
+    };
+  }, []);
 
   return (
     <div>
@@ -125,6 +140,16 @@ export default function ModalPreview(props) {
             <span className="p-2">
               <Badge color="secondary">{othersCount}</Badge>
             </span>
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink
+            className={classnames({ active: activeTab === "4" })}
+            onClick={() => {
+              toggle("4");
+            }}
+          >
+            {window.strings.CH_ChatHistory || "Chat history"}
           </NavLink>
         </NavItem>
       </Nav>
@@ -230,6 +255,9 @@ export default function ModalPreview(props) {
               ? ""
               : window.strings.CH_noFilesExist || "No Files Exist"}
           </div>
+        </TabPane>
+        <TabPane tabId="4">
+          <ChatPreview msg={msg} />
         </TabPane>
       </TabContent>
     </div>
