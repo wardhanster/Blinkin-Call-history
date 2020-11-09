@@ -71,7 +71,7 @@ label {
 .rounded-item {
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 6px 10px 0 rgba(0, 0, 0, 0.01);
   overflow: hidden;
-  height: 100vh;
+  height: 63vh;
 }
 .overflow-a {
   overflow-y: auto;
@@ -80,4 +80,5 @@ label {
 
 .h-100-val {
   height: 100vh;
+  overflow: auto;
 }
