@@ -44,7 +44,7 @@ class Layout extends React.Component {
     this.setState({
       roomId,
       activeParticipantsData: this.state.callData.data.find(
-        (data) => data.room_id === room_id
+        (data) => data.room_id === roomId
       ),
     });
 
@@ -109,7 +109,7 @@ class Layout extends React.Component {
               <ModalPreview
                 fileBasePath={this.props.fileBasePath}
                 previewData={this.state.screenshots}
-                participants={this.state.activeParticipantsData}
+                participants={this.state.activeParticipantsData.participants}
                 getChatHistory={this.getChatHistoryData}
               />
             </ModalBody>
