@@ -109,7 +109,7 @@ class Layout extends React.Component {
               <ModalPreview
                 fileBasePath={this.props.fileBasePath}
                 previewData={this.state.screenshots}
-                participants={this.state.activeParticipantsData.participants}
+                participants={this.state.activeParticipantsData}
                 getChatHistory={this.getChatHistoryData}
               />
             </ModalBody>
