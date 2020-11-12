@@ -14,6 +14,7 @@ class Layout extends React.Component {
     loading: false,
     pageNum: 1,
     roomId: null,
+    activeParticipantsData: null,
   };
 
   fetchCall = async (pageNum) => {
@@ -40,7 +41,11 @@ class Layout extends React.Component {
   }
 
   toggleShowImage = async (roomId) => {
-    this.setState({ roomId });
+    this.setState({
+      roomId,
+      activeParticipantsData: callData.find((data) => data.room_id === room_id),
+    });
+
     if (!this.state.showImage) {
       this.setState((prevState) => {
         return {
@@ -102,6 +107,7 @@ class Layout extends React.Component {
               <ModalPreview
                 fileBasePath={this.props.fileBasePath}
                 previewData={this.state.screenshots}
+                participants={this.state.activeParticipantsData}
                 getChatHistory={this.getChatHistoryData}
               />
             </ModalBody>

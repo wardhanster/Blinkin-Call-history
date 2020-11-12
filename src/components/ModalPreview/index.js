@@ -15,6 +15,7 @@ import {
 } from "reactstrap";
 import classnames from "classnames";
 import ChatPreview from "./ChatPreview";
+import Participants from "./Participants";
 
 import "./modal_preview.css";
 
@@ -152,6 +153,16 @@ export default function ModalPreview(props) {
             {window.strings.CH_ChatHistory || "Chat history"}
           </NavLink>
         </NavItem>
+        <NavItem>
+          <NavLink
+            className={classnames({ active: activeTab === "5" })}
+            onClick={() => {
+              toggle("5");
+            }}
+          >
+            {window.strings.CH_Participants || "Participants"}
+          </NavLink>
+        </NavItem>
       </Nav>
       <TabContent activeTab={activeTab}>
         {loading && <Loading />}
@@ -258,6 +269,9 @@ export default function ModalPreview(props) {
         </TabPane>
         <TabPane tabId="4">
           <ChatPreview msg={msg} />
+        </TabPane>
+        <TabPane tabId="5">
+          <Participants participants={props.participants} />
         </TabPane>
       </TabContent>
     </div>
