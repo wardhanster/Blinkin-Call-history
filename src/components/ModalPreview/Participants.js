@@ -1,10 +1,10 @@
 import React from "react";
 
-export default function Participants(data) {
-  console.log(data);
+export default function Participants({ participants }) {
+  console.log(participants);
   return (
     <div>
-      {JSON.parse(data.participants).map((item, key) => {
+      {JSON.parse(participants).map((item, key) => {
         return <p key={`par_${key}`}>{item.name}</p>;
       })}
     </div>
