@@ -1,6 +1,7 @@
 import React from "react";
 
 export default function Participants({ participants }) {
+  debugger;
   console.log(participants);
   return (
     <div>
