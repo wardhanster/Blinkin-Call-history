@@ -43,7 +43,7 @@ class Layout extends React.Component {
   toggleShowImage = async (roomId) => {
     this.setState({
       roomId,
-      activeParticipantsData: this.state.callData.find(
+      activeParticipantsData: this.state.callData.data.find(
         (data) => data.room_id === room_id
       ),
     });
