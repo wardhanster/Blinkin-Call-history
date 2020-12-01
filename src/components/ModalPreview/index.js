@@ -16,6 +16,7 @@ import {
 import classnames from "classnames";
 import ChatPreview from "./ChatPreview";
 import Participants from "./Participants";
+import { exportCSVFile } from "./createFileAndDownload";
 
 import "./modal_preview.css";
 
