@@ -114,7 +114,7 @@ export default function ModalPreview(props) {
           .split("::-")[0],
       });
     });
-    exportCSVFile(headers, itemsFormatted, `test_data`);
+    exportCSVFile(headers, itemsFormatted, `participants`);
     exportCSVFile(msgHeader, msgdata, `msg_data`);
   };
 
