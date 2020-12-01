@@ -88,6 +88,35 @@ export default function ModalPreview(props) {
     setOthersCount(others.length);
   }, [props.previewData]);
 
+  const handleDownload = () => {
+    const headers = {
+      name: "Name",
+      user_id: "User Id",
+      userAgent: "User Agent",
+    };
+    var itemsFormatted = [];
+    JSON.parse(props.participants.participants).forEach((item) => {
+      itemsFormatted.push({
+        name: item.name,
+        user_id: item.uid,
+        userAgent: JSON.stringify(item.ua.replace(",", " ")),
+      });
+    });
+
+    const msgHeader = { sentBy: "Sent by", content: "Content" };
+    var msgdata = [];
+    msg.forEach((item) => {
+      msgdata.push({
+        sentBy: JSON.parse(item.message).from,
+        content: JSON.parse(item.message)
+          .data?.message.replace(":-:img-", "")
+          .split("::-")[0],
+      });
+    });
+    exportCSVFile(headers, itemsFormatted, `test_data`);
+    exportCSVFile(msgHeader, msgdata, `msg_data`);
+  };
+
   useEffect(() => {
     const getCallhistory = async () => {
       let res = await props.getChatHistory();
@@ -163,6 +192,11 @@ export default function ModalPreview(props) {
             {window.strings.CH_Participants || "Participants"}
           </NavLink>
         </NavItem>
+        <li className="nav-item mt-1">
+          <button className="btn btn-sm btn-link" onClick={handleDownload}>
+            Download
+          </button>
+        </li>
       </Nav>
       <TabContent activeTab={activeTab}>
         {loading && <Loading />}
