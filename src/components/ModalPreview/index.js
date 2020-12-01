@@ -107,15 +107,18 @@ export default function ModalPreview(props) {
     const msgHeader = { sentBy: "Sent by", content: "Content" };
     var msgdata = [];
     msg.forEach((item) => {
+      let contentData = JSON.parse(item.message)
+        .data?.message.replace(":-:img-", "")
+        .split("::-")[0];
+      contentData = JSON.parse(item.message)
+        .data?.message.replace(":-:video-", "")
+        .split("::-")[0];
       msgdata.push({
         sentBy: JSON.parse(item.message).from,
-        content: JSON.parse(item.message)
-          .data?.message.replace(":-:img-", "")
-          .split("::-")[0],
+        content: contentData,
       });
     });
-    exportCSVFile(headers, itemsFormatted, `participants`);
-    exportCSVFile(msgHeader, msgdata, `msg_data`);
+    exportCSVFile(headers, itemsFormatted, msgHeader, msgdata, `call_data`);
   };
 
   useEffect(() => {

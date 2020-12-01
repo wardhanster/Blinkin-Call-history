@@ -16,7 +16,13 @@ function convertToCSV(objArray) {
   return str;
 }
 
-export default function exportCSVFile(headers, items, fileTitle) {
+export default function exportCSVFile(
+  headers,
+  items,
+  msgHeader,
+  msgData,
+  fileTitle
+) {
   if (headers) {
     items.unshift(headers);
   }
@@ -25,7 +31,12 @@ export default function exportCSVFile(headers, items, fileTitle) {
   var jsonObject = JSON.stringify(items);
 
   var csv = convertToCSV(jsonObject);
-
+  csv += "\r\n";
+  if (msgHeader) {
+    msgData.unshift(msgHeader);
+  }
+  var newData = JSON.stringify(msgData);
+  csv += convertToCSV(newData);
   var exportedFilenmae = fileTitle + ".csv" || "export.csv";
 
   var blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
