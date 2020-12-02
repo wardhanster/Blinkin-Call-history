@@ -93,12 +93,12 @@ export default function ModalPreview(props) {
     if (msg.indexOf(":-:img-") > -1) {
       let newMessage = msg.replace(":-:img-", "");
       newMessage = newMessage.split("::-");
-      return newMessage[0];
+      return newMessage[0].replace(/(\r\n|\n|\r)/gm, "");
     }
     if (msg.indexOf(":-:video-") > -1) {
       let newMessage = msg.replace(":-:video-", "");
       newMessage = newMessage.split("::-");
-      return newMessage[0];
+      return newMessage[0].replace(/(\r\n|\n|\r)/gm, "");
     }
   }
 
