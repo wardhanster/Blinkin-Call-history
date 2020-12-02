@@ -89,6 +89,19 @@ export default function ModalPreview(props) {
     setOthersCount(others.length);
   }, [props.previewData]);
 
+  function handleFileFormat(msg) {
+    if (msg.indexOf(":-:img-") > -1) {
+      let newMessage = msg.replace(":-:img-", "");
+      newMessage = newMessage.split("::-");
+      return newMessage[0];
+    }
+    if (msg.indexOf(":-:video-") > -1) {
+      let newMessage = msg.replace(":-:video-", "");
+      newMessage = newMessage.split("::-");
+      return newMessage[0];
+    }
+  }
+
   const handleDownload = () => {
     const headers = {
       name: "Name",
