@@ -95,6 +95,7 @@ export default function ModalPreview(props) {
       user_id: "User Id",
       userAgent: "User Agent",
     };
+
     var itemsFormatted = [];
     JSON.parse(props.participants.participants).forEach((item) => {
       itemsFormatted.push({
@@ -106,18 +107,18 @@ export default function ModalPreview(props) {
 
     const msgHeader = { sentBy: "Sent by", content: "Content" };
     var msgdata = [];
-    msg.forEach((item) => {
-      let contentData = JSON.parse(item.message)
-        .data?.message.replace(":-:img-", "")
-        .split("::-")[0];
-      contentData = JSON.parse(item.message)
-        .data?.message.replace(":-:video-", "")
-        .split("::-")[0];
-      msgdata.push({
-        sentBy: JSON.parse(item.message).from,
-        content: contentData,
+    if (msg) {
+      msg.forEach((item) => {
+        let contentData = handleFileFormat(
+          JSON.parse(item.message).data.message
+        );
+        msgdata.push({
+          sentBy: JSON.parse(item.message).from,
+          content: contentData,
+        });
       });
-    });
+    }
+
     exportCSVFile(headers, itemsFormatted, msgHeader, msgdata, `call_data`);
   };
 
