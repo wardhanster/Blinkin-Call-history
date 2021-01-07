@@ -9,6 +9,7 @@ const setCorrectTimeZone = (date) => {
 };
 
 const callLog = (props) => {
+  let {is_deleted=false} = props;
   let handleClick = (file_count, room_id) => {
     // if (file_count > 0) {
     props.showImage(room_id);
@@ -16,13 +17,15 @@ const callLog = (props) => {
   };
 
   let date = new Date(setCorrectTimeZone(props.call_start_time));
+  const theClass = !is_deleted ? "room_id_active":'';
   return (
     <tr className="calllog__row">
       <td
-        className="room_id_active"
-        onClick={() => handleClick(props.files_count, props.room_id)}
+        className={theClass}
+        onClick={() => (!is_deleted && handleClick(props.files_count, props.room_id))}
       >
         {props.room_id}
+        {is_deleted && <small style={{display:'block'}}>{window.strings.CH_deleted||'Deleted'}</small>}
       </td>
       <td className="text-muted">{props.getTimeZone(props.call_start_time)}</td>
       <td>
