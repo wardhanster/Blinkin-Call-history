@@ -21,6 +21,7 @@ class Example extends Component {
       fileBasePath={fileBasePath}
       fetchAPI={fetchAPI}
       getFilesAPI={getFilesAPI}
+      onImageDownloadClick={(url)=>alert(url)} // Download text "CH_DownloadText"
       Paginator={(data, handleNextPrevious) => (
         <Paginator
           maxClickableCells={5}

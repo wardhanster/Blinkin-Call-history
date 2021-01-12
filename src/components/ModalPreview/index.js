@@ -247,7 +247,7 @@ export default function ModalPreview(props) {
                               props.onImageDownloadClick(presentUrl);
                             }}
                           >
-                            Download
+                            {window.strings.CH_DownloadText || "Download"}
                           </button>
                         </div>
                       );
