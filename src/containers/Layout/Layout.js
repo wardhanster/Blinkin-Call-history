@@ -111,6 +111,7 @@ class Layout extends React.Component {
                 previewData={this.state.screenshots}
                 participants={this.state.activeParticipantsData}
                 getChatHistory={this.getChatHistoryData}
+                onImageDownloadClick={this.props.onImageDownloadClick}
               />
             </ModalBody>
             <ModalFooter>

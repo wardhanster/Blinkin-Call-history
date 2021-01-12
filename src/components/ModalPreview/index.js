@@ -232,13 +232,23 @@ export default function ModalPreview(props) {
                     .map((imageItem, index) => {
                       let presentUrl = `${props.fileBasePath}${imageItem.file_name}.${imageItem.file_extension}`;
                       return (
-                        <div className="m-1">
+                        <div className="m-1" key={`${index}_image`}>
                           <img
-                            key={`${index}_image`}
                             alt={`${index}_image`}
                             onLoad={stopLoading}
                             src={presentUrl}
                           />
+                          <button
+                            onClick={() => {
+                              if (!props.onImageDownloadClick) {
+                                console.log(presentUrl);
+                                return;
+                              }
+                              props.onImageDownloadClick(presentUrl);
+                            }}
+                          >
+                            Download
+                          </button>
                         </div>
                       );
                     })}
