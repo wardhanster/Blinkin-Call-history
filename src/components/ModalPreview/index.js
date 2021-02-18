@@ -100,6 +100,7 @@ export default function ModalPreview(props) {
       newMessage = newMessage.split("::-");
       return newMessage[0].replace(/(\r\n|\n|\r)/gm, "");
     }
+    return msg
   }
 
   const handleDownload = () => {
@@ -120,6 +121,7 @@ export default function ModalPreview(props) {
 
     const msgHeader = { sentBy: "Sent by", content: "Content" };
     var msgdata = [];
+    debugger;
     if (msg) {
       msg.forEach((item) => {
         let contentData = handleFileFormat(
