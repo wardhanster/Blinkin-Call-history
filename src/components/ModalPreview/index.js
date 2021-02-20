@@ -129,7 +129,7 @@ export default function ModalPreview(props) {
         );
         msgdata.push({
           sentBy: JSON.parse(item.message).from,
-          content: contentData,
+          content: `"${contentData}"`,
         });
       });
     }
