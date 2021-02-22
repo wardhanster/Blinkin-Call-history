@@ -1,12 +1,12 @@
 import React from "react";
 import "./CallLog.css";
 
-const setCorrectTimeZone = (date) => {
-  let a = new Date(date);
-  let timeZoneDifference = a.getTimezoneOffset();
-  a.setMinutes(a.getMinutes() - timeZoneDifference);
-  return a;
-};
+// const setCorrectTimeZone = (date) => {
+//   let a = new Date(date);
+//   let timeZoneDifference = a.getTimezoneOffset();
+//   a.setMinutes(a.getMinutes() - timeZoneDifference);
+//   return a;
+// };
 
 const callLog = (props) => {
   let {is_deleted=false} = props;
@@ -16,7 +16,7 @@ const callLog = (props) => {
     // }
   };
 
-  let date = new Date(setCorrectTimeZone(props.call_start_time));
+  // let date = new Date(setCorrectTimeZone(props.call_start_time));
   const theClass = !is_deleted ? "room_id_active":'';
   return (
     <tr className="calllog__row">
