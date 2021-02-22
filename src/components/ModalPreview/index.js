@@ -74,15 +74,15 @@ export default function ModalPreview(props) {
 
   useEffect(() => {
     let img = props.previewData.filter(
-      (e) => image.indexOf(e.file_extension.toLocaleLowerCase()) !== -1
+      (e) => image.includes(e.file_extension.toLocaleLowerCase())
     );
     let videos = props.previewData.filter(
-      (e) => video.indexOf(e.file_extension.toLocaleLowerCase()) !== -1
+      (e) => video.includes(e.file_extension.toLocaleLowerCase())
     );
     let others = props.previewData.filter(
       (e) =>
-        video.indexOf(e.file_extension.toLocaleLowerCase()) !== -1 &&
-        image.indexOf(e.file_extension.toLocaleLowerCase()) !== -1
+        !video.includes(e.file_extension.toLocaleLowerCase()) &&
+        !image.includes(e.file_extension.toLocaleLowerCase())
     );
     setImageCount(img.length);
     setVideoCount(videos.length);
@@ -91,14 +91,18 @@ export default function ModalPreview(props) {
 
   function handleFileFormat(msg) {
     if (msg.indexOf(":-:img-") > -1) {
-      let newMessage = msg.replace(":-:img-", "");
-      newMessage = newMessage.split("::-");
-      return newMessage[0].replace(/(\r\n|\n|\r)/gm, "");
+      let newMessage = msg.replace(":-:img-", "").replace("::-", "");
+      // newMessage = newMessage.split("::-");
+      return newMessage.replace(/(\r\n|\n|\r)/gm, "");
     }
     if (msg.indexOf(":-:video-") > -1) {
-      let newMessage = msg.replace(":-:video-", "");
-      newMessage = newMessage.split("::-");
-      return newMessage[0].replace(/(\r\n|\n|\r)/gm, "");
+      let newMessage = msg.replace(":-:video-", "").replace("::-", "");
+      // newMessage = newMessage.split("::-");
+      return newMessage.replace(/(\r\n|\n|\r)/gm, "");
+    }
+    if(msg.indexOf(":-:pdf-") > -1) {
+      let newMessage = msg.replace(":-:pdf-", "").replace("::-", "");
+      return newMessage.replace(/(\r\n|\n|\r)/gm, "");
     }
     return msg
   }
@@ -228,8 +232,7 @@ export default function ModalPreview(props) {
                   {props.previewData
                     .filter(
                       (e) =>
-                        image.indexOf(e.file_extension.toLocaleLowerCase()) !==
-                        -1
+                      image.includes(e.file_extension.toLocaleLowerCase())
                     )
                     .map((imageItem, index) => {
                       let presentUrl = `${props.fileBasePath}${imageItem.file_name}.${imageItem.file_extension}`;
@@ -258,7 +261,7 @@ export default function ModalPreview(props) {
               </div>
               {props.previewData.filter(
                 (e) =>
-                  image.indexOf(e.file_extension.toLocaleLowerCase()) !== -1
+                video.includes(e.file_extension.toLocaleLowerCase())
               ).length > 0
                 ? ""
                 : window.strings.CH_noImagesExist || "No Images Exist"}
@@ -270,7 +273,7 @@ export default function ModalPreview(props) {
             {props.previewData
               .filter(
                 (e) =>
-                  video.indexOf(e.file_extension.toLocaleLowerCase()) !== -1
+                video.includes(e.file_extension.toLocaleLowerCase())
               )
               .map((item, index) => {
                 let presentUrl = `${props.fileBasePath}${item.file_name}.${item.file_extension}`;
@@ -289,7 +292,7 @@ export default function ModalPreview(props) {
                 );
               })}
             {props.previewData.filter(
-              (e) => video.indexOf(e.file_extension.toLocaleLowerCase()) !== -1
+              (e) => video.includes(e.file_extension.toLocaleLowerCase())
             ).length > 0
               ? ""
               : window.strings.CH_noVideosExist || "No Videos Exist"}
@@ -300,8 +303,8 @@ export default function ModalPreview(props) {
             {props.previewData
               .filter(
                 (e) =>
-                  video.indexOf(e.file_extension.toLocaleLowerCase()) !== -1 &&
-                  image.indexOf(e.file_extension.toLocaleLowerCase()) !== -1
+                !video.includes(e.file_extension.toLocaleLowerCase()) &&
+                !image.includes(e.file_extension.toLocaleLowerCase())
               )
               .map((item, index) => {
                 let presentUrl = `${props.fileBasePath}${item.file_name}.${item.file_extension}`;
@@ -324,8 +327,8 @@ export default function ModalPreview(props) {
               })}
             {props.previewData.filter(
               (e) =>
-                video.indexOf(e.file_extension.toLocaleLowerCase()) !== -1 &&
-                image.indexOf(e.file_extension.toLocaleLowerCase()) !== -1
+              !video.includes(e.file_extension.toLocaleLowerCase()) &&
+              !image.includes(e.file_extension.toLocaleLowerCase())
             ).length > 0
               ? ""
               : window.strings.CH_noFilesExist || "No Files Exist"}
