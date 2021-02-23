@@ -335,7 +335,7 @@ export default function ModalPreview(props) {
           </div>
         </TabPane>
         <TabPane tabId="4">
-          <ChatPreview msg={msg} />
+          <ChatPreview msg={msg} RenderPdf={props.RenderPdf} />
         </TabPane>
         <TabPane tabId="5">
           <Participants participants={props.participants} />

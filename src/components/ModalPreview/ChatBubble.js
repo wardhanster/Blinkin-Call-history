@@ -1,7 +1,6 @@
 import React from "react";
-import RenderPdf from './renderPdf';
 
-export default function ChatBubble({ msgData }) {
+export default function ChatBubble({ msgData, RenderPdf  }) { 
 
   const appendVideo = (vid) => (
     <video style={{ maxWidth: "100%" }} src={vid} controls></video>

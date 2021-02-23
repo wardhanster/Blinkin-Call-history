@@ -2,7 +2,7 @@ import React from "react";
 import "./chat__preview.css";
 import ChatBubble from "./ChatBubble";
 
-export default function ChatPreview({ msg }) {
+export default function ChatPreview({ msg, RenderPdf }) {
   return (
     <div className="jumbotron m-0 p-0 bg-transparent">
       <div className="row m-0 p-0 ">
@@ -16,7 +16,7 @@ export default function ChatPreview({ msg }) {
                 {msg &&
                   msg.map((item, index) => {
                     return (
-                      <ChatBubble key={`${index}_chatItem`} msgData={item} />
+                      <ChatBubble RenderPdf={RenderPdf} key={`${index}_chatItem`} msgData={item} />
                     );
                   })}
               </div>

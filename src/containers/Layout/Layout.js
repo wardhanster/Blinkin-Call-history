@@ -107,6 +107,7 @@ class Layout extends React.Component {
           >
             <ModalBody>
               <ModalPreview
+                RenderPdf={this.props.RenderPdf}
                 fileBasePath={this.props.fileBasePath}
                 previewData={this.state.screenshots}
                 participants={this.state.activeParticipantsData}
