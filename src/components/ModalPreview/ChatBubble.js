@@ -10,8 +10,8 @@ export default function ChatBubble({ msgData, RenderPdf  }) {
     <img src={image} alt="support pic" style={{ width: "100%" }} />
   );
 
-  const appendPDF = (link, name) => (
-    <RenderPdf link={`${link}pdf`} name={name} />
+  const appendPDF = (link, name) => (    
+      <RenderPdf link={`${link}pdf`} name={name} />
   )
 
   const evaluateMessage = ({ message }) => {
@@ -55,10 +55,18 @@ export default function ChatBubble({ msgData, RenderPdf  }) {
     };
   };
 
+  const checkIsPDF = (msg = '') => {
+    if(msg.includes('pdf::-')) {
+      return true
+    }
+    return false
+  }
+
   const sentMsg = (msg) => {
     let { from, msgData } = evaluateMessage(msg);
+    const isPdf = checkIsPDF(msg.message)
     return (
-      <div className="balon1 p-2 m-0 position-relative" data-is={from}>
+      <div className="balon2 p-2 m-0 position-relative" data-is={from}>
         <a className="float-right">{msgData}</a>
       </div>
     );
@@ -66,9 +74,10 @@ export default function ChatBubble({ msgData, RenderPdf  }) {
 
   const receivedMsg = (msg) => {
     let { from, msgData } = evaluateMessage(msg);
+    const isPdf = checkIsPDF(msg.message)
     return (
       <div className="balon2 p-2 m-0 position-relative" data-is={from}>
-        <a className="float-left sohbet2">{msgData}</a>
+        <a className={`float-left sohbet2 ${isPdf ? 'pdf-div-msg': ''}`}>{msgData}</a>
       </div>
     );
   };

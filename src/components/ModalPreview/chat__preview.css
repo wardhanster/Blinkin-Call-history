@@ -82,3 +82,7 @@ label {
   height: 100%;
   overflow: auto;
 }
+
+.pdf-div-msg {
+  background-color: #42a5f5 !important;
+}
