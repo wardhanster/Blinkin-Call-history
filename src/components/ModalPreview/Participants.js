@@ -13,10 +13,10 @@ export default function Participants({ participants }) {
                     <b>Name</b> - {item.name}
                   </p>
                   <p className="card-text">
-                    <b>UserId</b> - {item.uid}
+                    <b>{window.strings.CH_userId || 'User ID'}</b> - {item.uid}
                   </p>
                   <p className="card-text">
-                    <b>User Agent</b> - {item.ua}
+                    <b>{window.strings.CH_userAgent || 'User Agent'}</b> - {item.ua}
                   </p>
                 </div>
               </div>
