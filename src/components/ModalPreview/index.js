@@ -218,7 +218,7 @@ export default function ModalPreview(props) {
         </NavItem>
         <li className="nav-item mt-1">
           <button className="btn btn-sm btn-link" onClick={handleDownload}>
-            Download
+            {window.strings.CH_DownloadText || "Download"}
           </button>
         </li>
       </Nav>
