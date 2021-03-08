@@ -66,7 +66,7 @@ export default function ChatBubble({ msgData, RenderPdf  }) {
     let { from, msgData } = evaluateMessage(msg);
     const isPdf = checkIsPDF(msg.message)
     return (
-      <div className="balon2 p-2 m-0 position-relative" data-is={from}>
+      <div className="balon1 p-2 m-0 position-relative" data-is={from}>
         <a className="float-right">{msgData}</a>
       </div>
     );
