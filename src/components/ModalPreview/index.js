@@ -141,6 +141,13 @@ export default function ModalPreview(props) {
     exportCSVFile(headers, itemsFormatted, msgHeader, msgdata, `call_data`);
   };
 
+  const getImagesLength = () => {
+    return props.previewData.filter(
+      (e) =>
+      image.includes(e.file_extension.toLocaleLowerCase())
+    ).length || 0
+  }
+
   useEffect(() => {
     const getCallhistory = async () => {
       let res = await props.getChatHistory();
@@ -227,7 +234,7 @@ export default function ModalPreview(props) {
         <TabPane tabId="1">
           <Row>
             <Col sm="12">
-              <div className="tab-all preview_image">
+              <div className={`tab-all ${getImagesLength() > 0 ? 'preview_image': ''}`}>
                 <div>
                   {props.previewData
                     .filter(
@@ -259,10 +266,7 @@ export default function ModalPreview(props) {
                     })}
                 </div>
               </div>
-              {props.previewData.filter(
-                (e) =>
-                image.includes(e.file_extension.toLocaleLowerCase())
-              ).length > 0
+              {getImagesLength() > 0
                 ? ""
                 : window.strings.CH_noImagesExist || "No Images Exist"}
             </Col>
