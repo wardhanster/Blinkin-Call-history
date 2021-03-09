@@ -261,7 +261,7 @@ export default function ModalPreview(props) {
               </div>
               {props.previewData.filter(
                 (e) =>
-                video.includes(e.file_extension.toLocaleLowerCase())
+                image.includes(e.file_extension.toLocaleLowerCase())
               ).length > 0
                 ? ""
                 : window.strings.CH_noImagesExist || "No Images Exist"}
